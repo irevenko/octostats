@@ -3,10 +3,11 @@ package github
 import (
 	"context"
 
+	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func GetMostForkedRepos(ctx context.Context, client *github.Client, allRepos []*github.Repository) ([]string, []int) {
+func MostForkedRepos(ctx context.Context, client *github.Client, allRepos []*github.Repository) (repoNames []string, repoForks []int) {
 	var forksSlice []int
 	var namesSlice []string
 
@@ -17,7 +18,7 @@ func GetMostForkedRepos(ctx context.Context, client *github.Client, allRepos []*
 		namesSlice = append(namesSlice, name)
 	}
 
-	sorted := calcStarsOrForks(namesSlice, forksSlice)
-	l, n := sortMap(sorted)
-	return l, n
+	forksNum := h.CalcStarsOrForks(namesSlice, forksSlice)
+	names, forks := h.SortMap(forksNum)
+	return names, forks
 }

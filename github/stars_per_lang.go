@@ -3,27 +3,28 @@ package github
 import (
 	"context"
 
+	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func GetStarsPerLanguage(ctx context.Context, client *github.Client, allRepos []*github.Repository) ([]string, []int) {
+func StarsPerLanguage(ctx context.Context, client *github.Client, allRepos []*github.Repository) (languages []string, starsNum []int) {
 	var starsSlice []int
-	var languagesSlice []string
+	var langsSlice []string
 
 	for _, v := range allRepos {
-		stars := *v.StargazersCount
-		starsSlice = append(starsSlice, stars)
+		starsNum := *v.StargazersCount
+		starsSlice = append(starsSlice, starsNum)
 
 		if v.Language != nil {
 			lang := *v.Language
-			languagesSlice = append(languagesSlice, lang)
+			langsSlice = append(langsSlice, lang)
 		} else {
 			lang := "No Language"
-			languagesSlice = append(languagesSlice, lang)
+			langsSlice = append(langsSlice, lang)
 		}
 	}
 
-	stars := calcStarsOrForks(languagesSlice, starsSlice)
-	l, n := sortMap(stars)
-	return l, n
+	stars := h.CalcStarsOrForks(langsSlice, starsSlice)
+	langs, count := h.SortMap(stars)
+	return langs, count
 }

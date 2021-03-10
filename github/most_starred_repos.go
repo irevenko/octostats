@@ -3,10 +3,11 @@ package github
 import (
 	"context"
 
+	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func GetMostStarredRepos(ctx context.Context, client *github.Client, allRepos []*github.Repository) ([]string, []int) {
+func MostStarredRepos(ctx context.Context, client *github.Client, allRepos []*github.Repository) (repoNames []string, repoStars []int) {
 	var starsSlice []int
 	var namesSlice []string
 
@@ -17,7 +18,7 @@ func GetMostStarredRepos(ctx context.Context, client *github.Client, allRepos []
 		namesSlice = append(namesSlice, name)
 	}
 
-	sorted := calcStarsOrForks(namesSlice, starsSlice)
-	l, n := sortMap(sorted)
-	return l, n
+	starsNum := h.CalcStarsOrForks(namesSlice, starsSlice)
+	names, stars := h.SortMap(starsNum)
+	return names, stars
 }

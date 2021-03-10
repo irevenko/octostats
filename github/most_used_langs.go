@@ -3,24 +3,25 @@ package github
 import (
 	"context"
 
+	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func GetMostUsedLanguages(ctx context.Context, client *github.Client, allRepos []*github.Repository) (languages []string, occurences []int) {
-	var languagesSlice []string
+func MostUsedLanguages(ctx context.Context, client *github.Client, allRepos []*github.Repository) (languages []string, occurrences []int) {
+	var langsSlice []string
 
 	for _, v := range allRepos {
 		if v.Language != nil {
 			lang := *v.Language
-			languagesSlice = append(languagesSlice, lang)
+			langsSlice = append(langsSlice, lang)
 		} else {
 			lang := "No Language"
-			languagesSlice = append(languagesSlice, lang)
+			langsSlice = append(langsSlice, lang)
 		}
 	}
 
-	mostUsedLangs := countLanguages(languagesSlice)
-	langs, occurs := sortMap(mostUsedLangs)
+	mostUsedLangs := h.CountDuplicates(langsSlice)
+	langs, occurrs := h.SortMap(mostUsedLangs)
 
-	return langs, occurs
+	return langs, occurrs
 }

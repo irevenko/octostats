@@ -3,13 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	g "./github"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )
 
-func main() {
+func auth() (context.Context, *github.Client) {
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: ""},
@@ -17,41 +18,58 @@ func main() {
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
 
-	allRepos := g.GetAllRepos(ctx, client, "skanehira")
+	return ctx, client
+}
 
-	languages, numbers := g.GetMostForkedRepos(ctx, client, allRepos)
+func main() {
+	ctx, client := auth()
+
+	allRepos := g.AllRepos(ctx, client, "hajimehoshi")
+
+	forkedRepos, forkedNums := g.MostForkedRepos(ctx, client, allRepos)
 	fmt.Println("Most forked repos")
-	fmt.Println(languages)
-	fmt.Println(numbers)
+	for i, v := range forkedRepos {
+		fmt.Println(v + ": " + strconv.Itoa(forkedNums[i]))
+	}
 
-	languages1, numbers1 := g.GetMostStarredRepos(ctx, client, allRepos)
-	fmt.Println("Most starred repos")
-	fmt.Println(languages1)
-	fmt.Println(numbers1)
+	starredRepos, starredNums := g.MostStarredRepos(ctx, client, allRepos)
+	fmt.Println("\nMost starred repos")
+	for i, v := range starredRepos {
+		fmt.Println(v + ": " + strconv.Itoa(starredNums[i]))
+	}
 
-	languages2, numbers2 := g.GetMostUsedLanguages(ctx, client, allRepos)
-	fmt.Println("Most used langs")
-	fmt.Println(languages2)
-	fmt.Println(numbers2)
+	usedLangs, langsNum := g.MostUsedLanguages(ctx, client, allRepos)
+	fmt.Println("\nMost used langs")
+	for i, v := range usedLangs {
+		fmt.Println(v + ": " + strconv.Itoa(langsNum[i]))
+	}
 
-	langsS, stars := g.GetStarsPerLanguage(ctx, client, allRepos)
-	fmt.Println("Stars per lang")
-	fmt.Println(langsS)
-	fmt.Println(stars)
+	usedLicenses, licsNum := g.MostUsedLicenses(ctx, client, allRepos)
+	fmt.Println("\nMost used licenses")
+	for i, v := range usedLicenses {
+		fmt.Println(v + ": " + strconv.Itoa(licsNum[i]))
+	}
 
-	langsF, forks := g.GetForksPerLanguage(ctx, client, allRepos)
-	fmt.Println("Forks per lang")
-	fmt.Println(langsF)
-	fmt.Println(forks)
+	starsPerL, starsNum := g.StarsPerLanguage(ctx, client, allRepos)
+	fmt.Println("\nStars per lang")
+	for i, v := range starsPerL {
+		fmt.Println(v + ": " + strconv.Itoa(starsNum[i]))
+	}
 
-	totalStars := g.GetTotalStars(ctx, client, allRepos)
-	fmt.Println("Total stars")
+	forksPerL, forksNum := g.ForksPerLanguage(ctx, client, allRepos)
+	fmt.Println("\nForks per lang")
+	for i, v := range forksPerL {
+		fmt.Println(v + ": " + strconv.Itoa(forksNum[i]))
+	}
+
+	totalStars := g.TotalStars(ctx, client, allRepos)
+	fmt.Println("\nTotal stars")
 	fmt.Println(totalStars)
 
-	totalForks := g.GetTotalForks(ctx, client, allRepos)
-	fmt.Println("Total forks")
+	totalForks := g.TotalForks(ctx, client, allRepos)
+	fmt.Println("\nTotal forks")
 	fmt.Println(totalForks)
 
-	fmt.Println("Total repos")
+	fmt.Println("\nTotal repos")
 	fmt.Println(len(allRepos))
 }

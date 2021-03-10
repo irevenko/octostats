@@ -7,7 +7,7 @@ import (
 	"github.com/google/go-github/github"
 )
 
-func GetAllRepos(ctx context.Context, client *github.Client, account string) []*github.Repository {
+func AllRepos(ctx context.Context, client *github.Client, account string) []*github.Repository {
 	opt := &github.RepositoryListOptions{
 		ListOptions: github.ListOptions{PerPage: 10},
 	}

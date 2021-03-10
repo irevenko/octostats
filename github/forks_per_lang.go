@@ -3,27 +3,28 @@ package github
 import (
 	"context"
 
+	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func GetForksPerLanguage(ctx context.Context, client *github.Client, allRepos []*github.Repository) ([]string, []int) {
+func ForksPerLanguage(ctx context.Context, client *github.Client, allRepos []*github.Repository) (languages []string, forksNum []int) {
 	var forksSlice []int
-	var languagesSlice []string
+	var langsSlice []string
 
 	for _, v := range allRepos {
-		forks := *v.ForksCount
-		forksSlice = append(forksSlice, forks)
+		forksNum := *v.ForksCount
+		forksSlice = append(forksSlice, forksNum)
 
 		if v.Language != nil {
 			lang := *v.Language
-			languagesSlice = append(languagesSlice, lang)
+			langsSlice = append(langsSlice, lang)
 		} else {
 			lang := "No Language"
-			languagesSlice = append(languagesSlice, lang)
+			langsSlice = append(langsSlice, lang)
 		}
 	}
 
-	forks := calcStarsOrForks(languagesSlice, forksSlice)
-	l, n := sortMap(forks)
-	return l, n
+	forks := h.CalcStarsOrForks(langsSlice, forksSlice)
+	langs, count := h.SortMap(forks)
+	return langs, count
 }
