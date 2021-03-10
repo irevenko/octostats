@@ -1,5 +1,5 @@
 # octostats 🐙🐱📦
-> A supplementary Go package on top of <a href="https://github.com/google/go-github">go-github</a> 
+> A supplementary package on top of <a href="https://github.com/google/go-github">go-github</a> 
 
 <p align="center"><img src="octo-gopher.png" width="300"></p>
 
@@ -25,14 +25,14 @@ import (
 )
 
 func auth() (context.Context, *github.Client) {
-	ctx := context.Background()
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: ""},
-	)
-	tc := oauth2.NewClient(ctx, ts)
-	client := github.NewClient(tc)
+    ctx := context.Background()
+    ts := oauth2.StaticTokenSource(
+	&oauth2.Token{AccessToken: ""},
+    )
+    tc := oauth2.NewClient(ctx, ts)
+    client := github.NewClient(tc)
 
-	return ctx, client
+    return ctx, client
 }
 ```
 
@@ -47,14 +47,14 @@ Returns slice of repos for user/organization (https://api.github.com/users/USERN
 import ( 
     "fmt"
 
-	gh "github.com/irevenko/octostats/github"
-	"github.com/google/go-github/github"
+    gh "github.com/irevenko/octostats/github"
+    "github.com/google/go-github/github"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
+    ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
 
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+    allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
     fmt.Println(allRepos)
 }
 ```
@@ -66,7 +66,7 @@ import (
     "fmt"
     "strconv"
 
-	gh "github.com/irevenko/octostats/github"
+    gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
 )
 
