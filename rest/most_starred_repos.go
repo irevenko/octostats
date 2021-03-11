@@ -1,13 +1,11 @@
-package github
+package rest
 
 import (
-	"context"
-
 	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func MostStarredRepos(ctx context.Context, client *github.Client, allRepos []*github.Repository) (repoNames []string, repoStars []int) {
+func MostStarredRepos(client *github.Client, allRepos []*github.Repository) (repoNames []string, repoStars []int) {
 	var starsSlice []int
 	var namesSlice []string
 

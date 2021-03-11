@@ -1,13 +1,11 @@
-package github
+package rest
 
 import (
-	"context"
-
 	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func MostUsedLicenses(ctx context.Context, client *github.Client, allRepos []*github.Repository) (licenses []string, occurrences []int) {
+func MostUsedLicenses(client *github.Client, allRepos []*github.Repository) (licenses []string, occurrences []int) {
 	var licensesSlice []string
 
 	for _, v := range allRepos {

@@ -1,75 +1,74 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"strconv"
 
-	g "./github"
-	"github.com/google/go-github/github"
-	"golang.org/x/oauth2"
+	g "./graphql"
+	r "./rest"
 )
 
-func auth() (context.Context, *github.Client) {
-	ctx := context.Background()
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: ""},
-	)
-	tc := oauth2.NewClient(ctx, ts)
-	client := github.NewClient(tc)
-
-	return ctx, client
-}
-
 func main() {
-	ctx, client := auth()
+	ctx, client := r.AuthREST("")
+	qlClient := g.AuthGraphQL("")
 
-	allRepos := g.AllRepos(ctx, client, "hajimehoshi")
+	allRepos := r.AllRepos(ctx, client, "skanehira")
 
-	forkedRepos, forkedNums := g.MostForkedRepos(ctx, client, allRepos)
-	fmt.Println("Most forked repos")
-	for i, v := range forkedRepos {
-		fmt.Println(v + ": " + strconv.Itoa(forkedNums[i]))
-	}
+	l, n := r.MostStarredRepos(client, allRepos)
+	fmt.Println(l[:10])
+	fmt.Println(n[:10])
 
-	starredRepos, starredNums := g.MostStarredRepos(ctx, client, allRepos)
-	fmt.Println("\nMost starred repos")
-	for i, v := range starredRepos {
-		fmt.Println(v + ": " + strconv.Itoa(starredNums[i]))
-	}
+	fmt.Println(g.AllContributions(qlClient, "skanehira", 2020, 2021))
 
-	usedLangs, langsNum := g.MostUsedLanguages(ctx, client, allRepos)
-	fmt.Println("\nMost used langs")
-	for i, v := range usedLangs {
-		fmt.Println(v + ": " + strconv.Itoa(langsNum[i]))
-	}
+	//g.LanguagesByCommit(qlClient, "denbondd", 2020, 2021)
 
-	usedLicenses, licsNum := g.MostUsedLicenses(ctx, client, allRepos)
-	fmt.Println("\nMost used licenses")
-	for i, v := range usedLicenses {
-		fmt.Println(v + ": " + strconv.Itoa(licsNum[i]))
-	}
+	//langs := g.LanguagesByCommit(qlClient, "irevenko", 2020, 2021)
 
-	starsPerL, starsNum := g.StarsPerLanguage(ctx, client, allRepos)
-	fmt.Println("\nStars per lang")
-	for i, v := range starsPerL {
-		fmt.Println(v + ": " + strconv.Itoa(starsNum[i]))
-	}
+	//fmt.Println(commits)
 
-	forksPerL, forksNum := g.ForksPerLanguage(ctx, client, allRepos)
-	fmt.Println("\nForks per lang")
-	for i, v := range forksPerL {
-		fmt.Println(v + ": " + strconv.Itoa(forksNum[i]))
-	}
+	// forkedRepos, forkedNums := r.MostForkedRepos(client, allRepos)
+	// fmt.Println("Most forked repos")
+	// for i, v := range forkedRepos {
+	// 	fmt.Println(v + ": " + strconv.Itoa(forkedNums[i]))
+	// }
 
-	totalStars := g.TotalStars(ctx, client, allRepos)
-	fmt.Println("\nTotal stars")
-	fmt.Println(totalStars)
+	// starredRepos, starredNums := r.MostStarredRepos(client, allRepos)
+	// fmt.Println("\nMost starred repos")
+	// for i, v := range starredRepos {
+	// 	fmt.Println(v + ": " + strconv.Itoa(starredNums[i]))
+	// }
 
-	totalForks := g.TotalForks(ctx, client, allRepos)
-	fmt.Println("\nTotal forks")
-	fmt.Println(totalForks)
+	// usedLangs, langsNum := r.LangsByRepo(client, allRepos)
+	// fmt.Println("\nMost used langs")
+	// for i, v := range usedLangs {
+	// 	fmt.Println(v + ": " + strconv.Itoa(langsNum[i]))
+	// }
 
-	fmt.Println("\nTotal repos")
-	fmt.Println(len(allRepos))
+	// usedLicenses, licsNum := r.MostUsedLicenses(client, allRepos)
+	// fmt.Println("\nMost used licenses")
+	// for i, v := range usedLicenses {
+	// 	fmt.Println(v + ": " + strconv.Itoa(licsNum[i]))
+	// }
+
+	// starsPerL, starsNum := r.StarsPerLanguage(client, allRepos)
+	// fmt.Println("\nStars per lang")
+	// for i, v := range starsPerL {
+	// 	fmt.Println(v + ": " + strconv.Itoa(starsNum[i]))
+	// }
+
+	// forksPerL, forksNum := r.ForksPerLanguage(client, allRepos)
+	// fmt.Println("\nForks per lang")
+	// for i, v := range forksPerL {
+	// 	fmt.Println(v + ": " + strconv.Itoa(forksNum[i]))
+	// }
+
+	// totalStars := r.TotalStars(client, allRepos)
+	// fmt.Println("\nTotal stars")
+	// fmt.Println(totalStars)
+
+	// totalForks := r.TotalForks(client, allRepos)
+	// fmt.Println("\nTotal forks")
+	// fmt.Println(totalForks)
+
+	// fmt.Println("\nTotal repos")
+	// fmt.Println(len(allRepos))
 }

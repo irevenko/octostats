@@ -1,13 +1,11 @@
-package github
+package rest
 
 import (
-	"context"
-
 	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func StarsPerLanguage(ctx context.Context, client *github.Client, allRepos []*github.Repository) (languages []string, starsNum []int) {
+func StarsPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, starsNum []int) {
 	var starsSlice []int
 	var langsSlice []string
 

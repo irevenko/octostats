@@ -1,13 +1,11 @@
-package github
+package rest
 
 import (
-	"context"
-
 	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func MostUsedLanguages(ctx context.Context, client *github.Client, allRepos []*github.Repository) (languages []string, occurrences []int) {
+func LanguagesByRepo(client *github.Client, allRepos []*github.Repository) (languages []string, occurrences []int) {
 	var langsSlice []string
 
 	for _, v := range allRepos {

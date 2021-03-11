@@ -1,13 +1,11 @@
-package github
+package rest
 
 import (
-	"context"
-
 	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func MostForkedRepos(ctx context.Context, client *github.Client, allRepos []*github.Repository) (repoNames []string, repoForks []int) {
+func MostForkedRepos(client *github.Client, allRepos []*github.Repository) (repoNames []string, repoForks []int) {
 	var forksSlice []int
 	var namesSlice []string
 

@@ -1,45 +1,36 @@
 # octostats 🐙🐱📦
-> A supplementary package on top of <a href="https://github.com/google/go-github">go-github</a> 
+> A supplementary Go package on top of <a href="https://github.com/google/go-github">go-github</a> and <a href="https://github.com/shurcooL/githubv4">githubv4</a>
 
 <p align="center"><img src="octo-gopher.png" width="300"></p>
 
 <p align="center">This package allows you to fetch extra GitHub data</p> <br>
 
 # Methods 🧰
-* [AllRepos](#AllRepos- "Goto ##AllRepos")
-* [MostUsedLanguages](#MostUsedLanguages- "Goto ##MostUsedLanguages")
-* [MostUsedLicenses](#MostUsedLicenses- "Goto ##MostUsedLicenses")
-* [MostStarredRepos](#MostStarredRepos- "Goto ##MostStarredRepos")
-* [MostForkedRepos](#MostForkedRepos- "Goto ##MostForkedRepos")
-* [StarsPerLanguage](#StarsPerLanguage- "Goto ##StarsPerLanguage")
-* [ForksPerLanguage](#AllRepos- "Goto ##ForksPerLanguage")
-* [TotalStars](#TotalStars- "Goto ##TotalStars")
-* [TotalForks](#TotalForks- "Goto ##TotalForks")
+* [REST](#REST "Goto #REST")
+	* [AllRepos](#AllRepos "Goto ##AllRepos")
+	* [LanguagesByRepo](#LanguagesByRepo "Goto ##LanguagesByRepo")
+	* [MostUsedLicenses](#MostUsedLicenses "Goto ##MostUsedLicenses")
+	* [MostStarredRepos](#MostStarredRepos "Goto ##MostStarredRepos")
+	* [MostForkedRepos](#MostForkedRepos "Goto ##MostForkedRepos")
+	* [StarsPerLanguage](#StarsPerLanguage "Goto ##StarsPerLanguage")
+	* [ForksPerLanguage](#AllRepos "Goto ##ForksPerLanguage")
+	* [TotalStars](#TotalStars "Goto ##TotalStars")
+	* [TotalForks](#TotalForks "Goto ##TotalForks")
+* [GraphQL](#GraphQL "Goto #GraphQL")
+	* [AllContributions](#AllContributions "Goto ##AllContributions")
+	* [AllCommits](#AllCommits "Goto ##AllCommits")
+	* [AllIssues](#AllIssues "Goto ##AllIssues")
+	* [AllPullRequests](#AllPullRequests "Goto ##AllPullRequests")
+	* [LanguagesByCommit](#LanguagesByCommit "Goto ##LanguagesByCommit")
+
 
 # Docs 📋
-All examples are using auth, so you need to provide such function
-```go
-import (
-    "context"
-    "golang.org/x/oauth2"
-)
+# REST
+All examples are using ```AuthREST``` <br>
+```ctx, client := r.AuthREST("<YOUR_TOKEN>")```
 
-func auth() (context.Context, *github.Client) {
-    ctx := context.Background()
-    ts := oauth2.StaticTokenSource(
-	&oauth2.Token{AccessToken: ""},
-    )
-    tc := oauth2.NewClient(ctx, ts)
-    client := github.NewClient(tc)
+If you want you can write your own auth but keep in mind that you in order to use this package ```client, context``` are required
 
-    return ctx, client
-}
-```
-
-And after this you can use ```ctx``` and ```client``` <br>
-```go
-ctx, client := auth()
-```
 
 ## AllRepos
 Returns slice of repos for user/organization (https://api.github.com/users/USERNAME/repos)
@@ -235,6 +226,13 @@ func main() {
 	fmt.Println(totalForks)
 }
 ```
+
+# GraphQL
+All examples are using ```AuthGraphQL``` <br>
+```client := r.AuthGraphQL("<YOUR_TOKEN>")```
+
+If you want you can write your own auth but keep in mind that you in order to use this package ```client``` is required
+
 
 # Contributing 🤝
 Contributions, issues and feature requests are welcome! 👍 <br>

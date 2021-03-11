@@ -1,13 +1,11 @@
-package github
+package rest
 
 import (
-	"context"
-
 	h "../helpers"
 	"github.com/google/go-github/github"
 )
 
-func ForksPerLanguage(ctx context.Context, client *github.Client, allRepos []*github.Repository) (languages []string, forksNum []int) {
+func ForksPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, forksNum []int) {
 	var forksSlice []int
 	var langsSlice []string
 

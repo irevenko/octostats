@@ -1,23 +1,45 @@
 package helpers
 
-import "sort"
+import (
+	"sort"
 
+	"github.com/shurcooL/githubv4"
+)
+
+//CountDuplicates func counts duplicates in string slice
 func CountDuplicates(strSlice []string) map[string]int {
 	duplicate := map[string]int{}
 
-	for _, item := range strSlice {
-		_, exist := duplicate[item]
+	for _, v := range strSlice {
+		_, exist := duplicate[v]
 
 		if exist {
-			duplicate[item]++
+			duplicate[v]++
 		} else {
-			duplicate[item] = 1
+			duplicate[v] = 1
 		}
 	}
 
 	return duplicate
 }
 
+func CountLanguagesCommit(strSlice []string, intSlice []githubv4.Int) map[string]githubv4.Int {
+	duplicate := map[string]githubv4.Int{}
+
+	for i, v := range strSlice {
+		_, exist := duplicate[v]
+
+		if exist {
+			duplicate[v] += intSlice[i]
+		} else {
+			duplicate[v] = intSlice[i]
+		}
+	}
+
+	return duplicate
+}
+
+//CalcStarsOrForks iterates over slice and calculates
 func CalcStarsOrForks(strings []string, integers []int) map[string]int {
 	newMap := map[string]int{}
 
