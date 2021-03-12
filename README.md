@@ -1,12 +1,15 @@
 # octostats 🐙🐱📦
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/irevenko/octostats.svg)](https://pkg.go.dev/github.com/irevenko/octostats)
+
 > A supplementary Go package on top of <a href="https://github.com/google/go-github">go-github</a> and <a href="https://github.com/shurcooL/githubv4">githubv4</a>
 
 <p align="center"><img src="octo-gopher.png" width="300"></p>
 
-<p align="center">This package allows you to fetch extra GitHub data</p> <br>
+<p align="center">GitHub API Superstructure</p> <br>
 
 # Installation 🔨
-```go get -u github.com/irevenko/octostats```
+```go get github.com/irevenko/octostats```
 
 # Methods 🧰
 * [REST](#REST "Goto #REST")
@@ -41,7 +44,7 @@ Returns slice of repos for user/organization (https://api.github.com/users/USERN
 import ( 
     "fmt"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
     r "github.com/irevenko/octostats/rest"
 )
 
@@ -60,7 +63,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
     r "github.com/irevenko/octostats/rest"
 )
 
@@ -84,7 +87,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -108,7 +111,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -132,7 +135,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -156,7 +159,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -179,7 +182,7 @@ import (
  	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -202,7 +205,7 @@ Returns integer number
 import ( 
 	"fmt"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -223,7 +226,7 @@ Returns integer number
 import ( 
 	"fmt"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -349,6 +352,9 @@ func main() {
 # Contributing 🤝
 Contributions, issues and feature requests are welcome! 👍 <br>
 Feel free to check [open issues](https://github.com/irevenko/octostats/issues).
+
+# What I Learned 🧠
+- GraphQL basics
 
 # Notes
 - shows private repos and repos from orgs when using empty string as name (if authorized)

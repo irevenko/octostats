@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 )
 
 func AllRepos(ctx context.Context, client *github.Client, account string) []*github.Repository {

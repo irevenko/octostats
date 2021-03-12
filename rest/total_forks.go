@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v33/github"
 )
 
 func TotalForks(client *github.Client, allRepos []*github.Repository) (forksNum int) {
