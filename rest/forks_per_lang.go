@@ -1,8 +1,8 @@
 package rest
 
 import (
-	h "../helpers"
 	"github.com/google/go-github/github"
+	h "github.com/irevenko/octostats/helpers"
 )
 
 func ForksPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, forksNum []int) {

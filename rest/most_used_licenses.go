@@ -1,8 +1,8 @@
 package rest
 
 import (
-	h "../helpers"
 	"github.com/google/go-github/github"
+	h "github.com/irevenko/octostats/helpers"
 )
 
 func MostUsedLicenses(client *github.Client, allRepos []*github.Repository) (licenses []string, occurrences []int) {

@@ -343,7 +343,6 @@ func main() {
 }
 ```
 
-
 # Contributing 🤝
 Contributions, issues and feature requests are welcome! 👍 <br>
 Feel free to check [open issues](https://github.com/irevenko/octostats/issues).

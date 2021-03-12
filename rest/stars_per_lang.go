@@ -1,8 +1,8 @@
 package rest
 
 import (
-	h "../helpers"
 	"github.com/google/go-github/github"
+	h "github.com/irevenko/octostats/helpers"
 )
 
 func StarsPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, starsNum []int) {

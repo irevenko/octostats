@@ -1,7 +1,7 @@
 package graphql
 
 import (
-	h "../helpers"
+	h "github.com/irevenko/octostats/helpers"
 	"github.com/shurcooL/githubv4"
 )
 
