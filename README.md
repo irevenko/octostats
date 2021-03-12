@@ -9,6 +9,11 @@
 <p align="center">GitHub API Superstructure</p> <br>
 
 # Installation 🔨
+```go get github.com/google/go-github``` <br>
+```go get github.com/google/go-querystring``` <br>
+```go get github.com/shurcooL/githubv4``` <br>
+```go get golang.org/x/oauth2``` <br> <br>
+
 ```go get github.com/irevenko/octostats```
 
 # Methods 🧰
@@ -31,6 +36,7 @@
 
 
 # Docs 📋
+Go Reference: https://pkg.go.dev/github.com/irevenko/octostats
 # REST
 All examples are using ```AuthREST``` <br>
 ```ctx, client := r.AuthREST("<YOUR_TOKEN>")```
