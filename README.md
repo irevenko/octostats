@@ -17,11 +17,11 @@
 	* [TotalStars](#TotalStars "Goto ##TotalStars")
 	* [TotalForks](#TotalForks "Goto ##TotalForks")
 * [GraphQL](#GraphQL "Goto #GraphQL")
+	* [LanguagesByCommit](#LanguagesByCommit "Goto ##LanguagesByCommit")
 	* [AllContributions](#AllContributions "Goto ##AllContributions")
 	* [AllCommits](#AllCommits "Goto ##AllCommits")
 	* [AllIssues](#AllIssues "Goto ##AllIssues")
 	* [AllPullRequests](#AllPullRequests "Goto ##AllPullRequests")
-	* [LanguagesByCommit](#LanguagesByCommit "Goto ##LanguagesByCommit")
 
 
 # Docs 📋
@@ -38,35 +38,36 @@ Returns slice of repos for user/organization (https://api.github.com/users/USERN
 import ( 
     "fmt"
 
-    gh "github.com/irevenko/octostats/github"
-    "github.com/google/go-github/github"
+	"github.com/google/go-github/github"
+    r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
 	fmt.Println(allRepos)
 }
 ```
 
-## MostUsedLanguages
+## LanguagesByRepo
 Returns two slices of names and occurrences
 ```go
 import ( 
 	"fmt"
 	"strconv"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+    r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	usedLangs, langsNum := gh.MostUsedLanguages(ctx, client, allRepos)
-	fmt.Println("Most used langs")
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+
+	usedLangs, langsNum := r.LanguagesByRepo(client, allRepos)
+	fmt.Println("Languages By Repo")
 	for i, v := range usedLangs {
 		fmt.Println(v + ": " + strconv.Itoa(langsNum[i]))
 	}
@@ -80,15 +81,16 @@ import (
 	"fmt"
 	"strconv"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+	r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME")// could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	usedLicenses, licsNum := gh.MostUsedLicenses(ctx, client, allRepos)
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+
+	usedLicenses, licsNum := r.MostUsedLicenses(client, allRepos)
 	fmt.Println("Most used licenses")
 	for i, v := range usedLicenses {
 		fmt.Println(v + ": " + strconv.Itoa(licsNum[i]))
@@ -103,15 +105,16 @@ import (
 	"fmt"
 	"strconv"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+	r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
+
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
     
-	starredRepos, starredNums := gh.MostStarredRepos(ctx, client, allRepos)
+	starredRepos, starredNums := r.MostStarredRepos(client, allRepos)
 	fmt.Println("Most starred repos")
 	for i, v := range starredRepos {
 		fmt.Println(v + ": " + strconv.Itoa(starredNums[i]))
@@ -126,15 +129,16 @@ import (
 	"fmt"
 	"strconv"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+	r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
+
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
     
-	forkedRepos, forkedNums := gh.MostForkedRepos(ctx, client, allRepos)
+	forkedRepos, forkedNums := r.MostForkedRepos(client, allRepos)
 	fmt.Println("Most forked repos")
 	for i, v := range forkedRepos {
 		fmt.Println(v + ": " + strconv.Itoa(forkedNums[i]))
@@ -149,15 +153,16 @@ import (
 	"fmt"
 	"strconv"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+	r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
+
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
     
-	starsPerL, starsNum := gh.StarsPerLanguage(ctx, client, allRepos)
+	starsPerL, starsNum := r.StarsPerLanguage(client, allRepos)
 	fmt.Println("Stars per lang")
 	for i, v := range starsPerL {
 		fmt.Println(v + ": " + strconv.Itoa(starsNum[i]))
@@ -171,15 +176,16 @@ import (
  	"fmt"
 	"strconv"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+	r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	forksPerL, forksNum := gh.ForksPerLanguage(ctx, client, allRepos)
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+
+	forksPerL, forksNum := r.ForksPerLanguage(client, allRepos)
 	fmt.Println("Forks per lang")
 	for i, v := range forksPerL {
 		fmt.Println(v + ": " + strconv.Itoa(forksNum[i]))
@@ -193,15 +199,16 @@ Returns integer number
 import ( 
 	"fmt"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+	r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
+
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
     
-	totalStars := g.TotalStars(ctx, client, allRepos)
+	totalStars := r.TotalStars(client, allRepos)
 	fmt.Println("Total stars")
 	fmt.Println(totalStars)
 }
@@ -213,15 +220,16 @@ Returns integer number
 import ( 
 	"fmt"
 
-	gh "github.com/irevenko/octostats/github"
 	"github.com/google/go-github/github"
+	r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
-	ctx, client := auth() //this function is located at the top of the irevenko/octostats Docs section in README
-	allRepos := gh.AllRepos(ctx, client, "USERNAME") //could be user or organization name
+	ctx, client := r.AuthREST("<YOUR_TOKEN>")
+
+	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
     
-	totalForks := g.TotalForks(ctx, client, allRepos)
+	totalForks := r.TotalForks(client, allRepos)
 	fmt.Println("Total forks")
 	fmt.Println(totalForks)
 }
@@ -232,6 +240,108 @@ All examples are using ```AuthGraphQL``` <br>
 ```client := r.AuthGraphQL("<YOUR_TOKEN>")```
 
 If you want you can write your own auth but keep in mind that you in order to use this package ```client``` is required
+
+## LanguagesByCommit
+Returns two slices of languages and commits <br>
+```from``` and ```to``` must be within 1 year span (2009, 2010 OR 2014, 2015 etc...)
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	langs, commits := g.LanguagesByCommit(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	fmt.Println("\nLanguages by commit")
+	for i, v := range langs {
+		fmt.Printf("%v : %v\n", v, commits[i])
+	}
+}
+```
+
+## AllContributions
+Returns ```ContributionsCollection``` (see https://github.com/irevenko/octostats/blob/main/graphql/types.go) <br>
+```from``` and ```to``` must be within 1 year span (2009, 2010 OR 2014, 2015 etc...)
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	allContribs := g.AllContributions(qlClient, user, 2020, 2021)
+	fmt.Println("\nAll contribs 2020-2021:")
+	fmt.Println(allContribs)
+}
+```
+
+## AllCommits
+Returns ```[]commitContributions``` (see https://github.com/irevenko/octostats/blob/main/graphql/types.go)<br>
+```from``` and ```to``` must be within 1 year span (2009, 2010 OR 2014, 2015 etc...)
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	allCommits := g.AllCommits(qlClient, user, 2020, 2021)
+	fmt.Println("\nAll commits 2020-2021:")
+	fmt.Println(allCommits)
+}
+```
+
+## AllIssues
+Returns ```[]issueContributions``` (see https://github.com/irevenko/octostats/blob/main/graphql/types.go)<br>
+```from``` and ```to``` must be within 1 year span (2009, 2010 OR 2014, 2015 etc...)
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	allIssues := g.AllIssues(qlClient, user, 2020, 2021)
+	fmt.Println("\nAll issues 2020-2021:")
+	fmt.Println(allIssues)
+}
+```
+
+## AllPullRequests
+Returns ```[]pullRequestContributions``` (see https://github.com/irevenko/octostats/blob/main/graphql/types.go)<br>
+```from``` and ```to``` must be within 1 year span (2009, 2010 OR 2014, 2015 etc...)
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	allPrs := g.AllPullRequests(qlClient, user, 2020, 2021)
+	fmt.Println("\nAll pull requests 2020-2021:")
+	fmt.Println(allPrs)
+}
+```
 
 
 # Contributing 🤝

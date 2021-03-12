@@ -23,6 +23,7 @@ func CountDuplicates(strSlice []string) map[string]int {
 	return duplicate
 }
 
+//CountLanguagesCommit counts duplicates and adds up commits values
 func CountLanguagesCommit(strSlice []string, intSlice []githubv4.Int) map[string]githubv4.Int {
 	duplicate := map[string]githubv4.Int{}
 
@@ -39,7 +40,7 @@ func CountLanguagesCommit(strSlice []string, intSlice []githubv4.Int) map[string
 	return duplicate
 }
 
-//CalcStarsOrForks iterates over slice and calculates
+//CalcStarsOrForks iterates over slice and adds up it's values
 func CalcStarsOrForks(strings []string, integers []int) map[string]int {
 	newMap := map[string]int{}
 
@@ -50,9 +51,10 @@ func CalcStarsOrForks(strings []string, integers []int) map[string]int {
 	return newMap
 }
 
+//SortMap splits map into two slices and sorts them
 func SortMap(someMap map[string]int) (strings []string, integers []int) {
-	var strVal []string
-	var intVal []int
+	var strSlice []string
+	var intSlice []int
 
 	keys := make([]string, 0, len(someMap))
 	for key := range someMap {
@@ -64,9 +66,30 @@ func SortMap(someMap map[string]int) (strings []string, integers []int) {
 	})
 
 	for _, key := range keys {
-		intVal = append(intVal, someMap[key])
-		strVal = append(strVal, key)
+		intSlice = append(intSlice, someMap[key])
+		strSlice = append(strSlice, key)
 	}
 
-	return strVal, intVal
+	return strSlice, intSlice
+}
+
+func SortIntv4Map(someMap map[string]githubv4.Int) (strings []string, integers []githubv4.Int) {
+	var strSlice []string
+	var intSlice []githubv4.Int
+
+	keys := make([]string, 0, len(someMap))
+	for key := range someMap {
+		keys = append(keys, key)
+	}
+
+	sort.Slice(keys, func(i, j int) bool {
+		return someMap[keys[i]] > someMap[keys[j]]
+	})
+
+	for _, key := range keys {
+		intSlice = append(intSlice, someMap[key])
+		strSlice = append(strSlice, key)
+	}
+
+	return strSlice, intSlice
 }

@@ -1,13 +1,11 @@
 package graphql
 
 import (
-	"fmt"
-
 	h "../helpers"
 	"github.com/shurcooL/githubv4"
 )
 
-func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) {
+func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) (languages []string, commitsNum []githubv4.Int) {
 	commits := AllCommits(client, user, from, to)
 
 	var langsSlice []string
@@ -23,15 +21,8 @@ func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) {
 		numsSlice = append(numsSlice, commits[i].Contributions.TotalCount)
 	}
 
-	fmt.Println(langsSlice)
-	fmt.Println(numsSlice)
-
 	languagesCommit := h.CountLanguagesCommit(langsSlice, numsSlice)
+	langs, count := h.SortIntv4Map(languagesCommit)
 
-	fmt.Println(languagesCommit)
-	//langs, count := h.SortMap(languagesCommit)
-	// cast githubv4.Int to normal int
-	//return langs, count
-
-	//fmt.Println(h.CountIntDuplicates())
+	return langs, count
 }
