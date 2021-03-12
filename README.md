@@ -5,6 +5,9 @@
 
 <p align="center">This package allows you to fetch extra GitHub data</p> <br>
 
+# Installation 🔨
+```go get -u github.com/irevenko/octostats```
+
 # Methods 🧰
 * [REST](#REST "Goto #REST")
 	* [AllRepos](#AllRepos "Goto ##AllRepos")
@@ -277,7 +280,7 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allContribs := g.AllContributions(qlClient, user, 2020, 2021)
+	allContribs := g.AllContributions(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
 	fmt.Println("\nAll contribs 2020-2021:")
 	fmt.Println(allContribs)
 }
@@ -297,7 +300,7 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allCommits := g.AllCommits(qlClient, user, 2020, 2021)
+	allCommits := g.AllCommits(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
 	fmt.Println("\nAll commits 2020-2021:")
 	fmt.Println(allCommits)
 }
@@ -317,7 +320,7 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allIssues := g.AllIssues(qlClient, user, 2020, 2021)
+	allIssues := g.AllIssues(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
 	fmt.Println("\nAll issues 2020-2021:")
 	fmt.Println(allIssues)
 }
@@ -337,7 +340,7 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allPrs := g.AllPullRequests(qlClient, user, 2020, 2021)
+	allPrs := g.AllPullRequests(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
 	fmt.Println("\nAll pull requests 2020-2021:")
 	fmt.Println(allPrs)
 }
