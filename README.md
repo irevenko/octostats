@@ -50,7 +50,7 @@ Returns slice of repos for user/organization (https://api.github.com/users/USERN
 import ( 
     "fmt"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
     r "github.com/irevenko/octostats/rest"
 )
 
@@ -69,7 +69,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
     r "github.com/irevenko/octostats/rest"
 )
 
@@ -93,7 +93,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -117,7 +117,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -141,7 +141,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -165,7 +165,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -188,7 +188,7 @@ import (
  	"fmt"
 	"strconv"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -211,7 +211,7 @@ Returns integer number
 import ( 
 	"fmt"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -232,7 +232,7 @@ Returns integer number
 import ( 
 	"fmt"
 
-	"github.com/google/go-github/v33/github"
+	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
 )
 
@@ -249,7 +249,7 @@ func main() {
 
 # GraphQL
 All examples are using ```AuthGraphQL``` <br>
-```client := r.AuthGraphQL("<YOUR_TOKEN>")```
+```client := g.AuthGraphQL("<YOUR_TOKEN>")```
 
 If you want you can write your own auth but keep in mind that you in order to use this package ```client``` is required
 
@@ -361,6 +361,7 @@ Feel free to check [open issues](https://github.com/irevenko/octostats/issues).
 
 # What I Learned 🧠
 - GraphQL basics
+- GoLang API auth
 
 # Notes
 - shows private repos and repos from orgs when using empty string as name (if authorized)
