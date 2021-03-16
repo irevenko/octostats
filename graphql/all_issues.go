@@ -8,7 +8,7 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
-func AllIssues(client *githubv4.Client, user string, from int, to int) []issueContributions {
+func AllIssues(client *githubv4.Client, user string, from int, to int) []IssueContributions {
 	loc, _ := time.LoadLocation("Local")
 	fromDate := time.Date(from, time.Month(1), 1, 0, 0, 0, 0, loc)
 	toDate := time.Date(to, time.Month(1), 1, 0, 0, 0, 0, loc)

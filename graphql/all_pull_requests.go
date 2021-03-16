@@ -8,7 +8,7 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
-func AllPullRequests(client *githubv4.Client, user string, from int, to int) []pullRequestContributions {
+func AllPullRequests(client *githubv4.Client, user string, from int, to int) []PullRequestContributions {
 	loc, _ := time.LoadLocation("Local")
 	fromDate := time.Date(from, time.Month(1), 1, 0, 0, 0, 0, loc)
 	toDate := time.Date(to, time.Month(1), 1, 0, 0, 0, 0, loc)

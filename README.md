@@ -33,7 +33,7 @@
 	* [AllCommits](#AllCommits "Goto ##AllCommits")
 	* [AllIssues](#AllIssues "Goto ##AllIssues")
 	* [AllPullRequests](#AllPullRequests "Goto ##AllPullRequests")
-
+	* [YearActivity](#YearActivity "Goto ##YearActivity")
 
 # Docs 📋
 Go Reference: https://pkg.go.dev/github.com/irevenko/octostats
@@ -352,6 +352,24 @@ func main() {
 	allPrs := g.AllPullRequests(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
 	fmt.Println("\nAll pull requests 2020-2021:")
 	fmt.Println(allPrs)
+}
+```
+
+## YearActivity
+Returns two slices of dates and contributions <br>
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	dates, contribs := g.YearActivity(qlClient, user)
+	fmt.Println(dates, contribs)
 }
 ```
 
