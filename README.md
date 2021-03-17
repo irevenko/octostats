@@ -385,5 +385,9 @@ Feel free to check [open issues](https://github.com/irevenko/octostats/issues).
 - shows private repos and repos from orgs when using empty string as name (if authorized)
 - see readme-stats, metrics
 
+# ToDo
+- Docs/Types for user/org details method
+- return errors
+
 # License 📑 
 (c) 2021 Ilya Revenko. [MIT License](https://tldrlegal.com/license/mit-license)

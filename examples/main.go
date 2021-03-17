@@ -96,6 +96,15 @@ func GraphqlExamples(qlClient *githubv4.Client, user string) {
 	fmt.Println("\nAll contributions 2020-2021:")
 	fmt.Println(allContribs)
 
+	fmt.Println("\nLast year activity:")
 	dates, contribs := g.YearActivity(qlClient, user)
 	fmt.Println(dates, contribs)
+
+	fmt.Println("\nUser Details:")
+	userInfo := g.UserDetails(qlClient, user)
+	fmt.Println(userInfo)
+
+	//fmt.Println("\nOrganization Details:")
+	//orgInfo := g.OrganizationDetails(qlClient, user)
+	//fmt.Println(orgInfo)
 }
