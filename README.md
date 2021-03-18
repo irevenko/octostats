@@ -34,6 +34,8 @@
 	* [AllIssues](#AllIssues "Goto ##AllIssues")
 	* [AllPullRequests](#AllPullRequests "Goto ##AllPullRequests")
 	* [YearActivity](#YearActivity "Goto ##YearActivity")
+	* [UserDetails](#UserDetails "Goto ##UserDetails")
+	* [OrganizationDetails](#OrganizationDetails "Goto ##OrganizationDetails")
 
 # Docs 📋
 Go Reference: https://pkg.go.dev/github.com/irevenko/octostats
@@ -368,8 +370,46 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	dates, contribs := g.YearActivity(qlClient, user)
+	dates, contribs := g.YearActivity(qlClient, "<USER_OR_ORGANIZATION>")
 	fmt.Println(dates, contribs)
+}
+```
+
+## UserDetails
+Returns ```User``` (see https://github.com/irevenko/octostats/blob/main/graphql/types.go)<br>
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	fmt.Println("User Details:")
+	userInfo := g.UserDetails(qlClient, "<USER>")
+	fmt.Println(userInfo)
+}
+```
+
+## OrganizationDetails
+Returns ```Organization``` (see https://github.com/irevenko/octostats/blob/main/graphql/types.go)<br>
+```go
+import ( 
+	"fmt"
+
+	"github.com/shurcooL/githubv4"
+	g "github.com/irevenko/octostats/graphql"
+)
+
+func main() {
+	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
+
+	fmt.Println("Organization Details:")
+	orgInfo := g.OrganizationDetails(qlClient, "<ORGANIZATION>")
+	fmt.Println(orgInfo)
 }
 ```
 
@@ -386,7 +426,6 @@ Feel free to check [open issues](https://github.com/irevenko/octostats/issues).
 - see readme-stats, metrics
 
 # ToDo
-- Docs/Types for user/org details method
 - return errors
 
 # License 📑 

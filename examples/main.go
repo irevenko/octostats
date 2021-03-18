@@ -104,7 +104,7 @@ func GraphqlExamples(qlClient *githubv4.Client, user string) {
 	userInfo := g.UserDetails(qlClient, user)
 	fmt.Println(userInfo)
 
-	//fmt.Println("\nOrganization Details:")
-	//orgInfo := g.OrganizationDetails(qlClient, user)
-	//fmt.Println(orgInfo)
+	fmt.Println("\nOrganization Details:")
+	orgInfo := g.OrganizationDetails(qlClient, "microsoft")
+	fmt.Println(orgInfo)
 }

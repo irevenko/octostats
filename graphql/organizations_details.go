@@ -7,9 +7,9 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
-func OrganizationDetails(client *githubv4.Client, user string) interface{} {
+func OrganizationDetails(client *githubv4.Client, organization string) Organization {
 	variables := map[string]interface{}{
-		"user": githubv4.String(user),
+		"user": githubv4.String(organization),
 	}
 
 	err := client.Query(context.Background(), &OrganizationQuery, variables)
@@ -17,23 +17,5 @@ func OrganizationDetails(client *githubv4.Client, user string) interface{} {
 		log.Fatal(err)
 	}
 
-	mapUser := OrganizationQuery.Organization
-
-	jsonResp := map[string]interface{}{
-		"username":     mapUser.Login,
-		"name":         mapUser.Name,
-		"avatar_url":   mapUser.AvatarURL,
-		"location":     mapUser.Location,
-		"email":        mapUser.Email,
-		"twitter":      mapUser.TwitterUsername,
-		"website_url":  mapUser.WebsiteURL,
-		"description":  mapUser.Description,
-		"created_at":   mapUser.CreatedAt.Time,
-		"projects":     mapUser.Projects.TotalCount,
-		"packages":     mapUser.Packages.TotalCount,
-		"repositories": mapUser.Repositories.TotalCount,
-		"members":      mapUser.MembersWithRole.TotalCount,
-	}
-
-	return jsonResp
+	return OrganizationQuery.Organization
 }
