@@ -3,13 +3,13 @@ package graphql
 import "github.com/shurcooL/githubv4"
 
 type Contributions struct {
-	TotalCount githubv4.Int
+	TotalCount int
 }
 
 type Repository struct {
-	NameWithOwner   githubv4.String
+	NameWithOwner   string
 	PrimaryLanguage struct {
-		Name githubv4.String
+		Name string
 	}
 }
 
@@ -84,40 +84,40 @@ type ContributionDays struct {
 }
 
 type User struct {
-	Login           githubv4.String
-	Name            githubv4.String
-	AvatarURL       githubv4.URI
-	Location        githubv4.String
-	Company         githubv4.String
-	Email           githubv4.String
-	TwitterUsername githubv4.String
-	WebsiteURL      githubv4.URI
-	Bio             githubv4.String
+	Login           string
+	Name            string
+	AvatarURL       string
+	Location        string
+	Company         string
+	Email           string
+	TwitterUsername string
+	WebsiteURL      string
+	Bio             string
 	Status          struct {
 		Emoji   string
 		Message string
 	}
 	CreatedAt githubv4.DateTime
 	Followers struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	}
 	Following struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	}
 	StarredRepositories struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	}
 	Projects struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	}
 	Packages struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	}
 	Watching struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	} `graphql:"watching(privacy: PUBLIC)"`
 	Gists struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	} `graphql:"gists(privacy: PUBLIC)"`
 	Repositories struct {
 		TotalCount int
@@ -146,25 +146,25 @@ type User struct {
 }
 
 type Organization struct {
-	Login           githubv4.String
-	Name            githubv4.String
-	AvatarURL       githubv4.URI
-	Location        githubv4.String
-	Email           githubv4.String
-	TwitterUsername githubv4.String
-	WebsiteURL      githubv4.URI
-	Description     githubv4.String
+	Login           string
+	Name            string
+	AvatarURL       string
+	Location        string
+	Email           string
+	TwitterUsername string
+	WebsiteURL      string
+	Description     string
 	CreatedAt       githubv4.DateTime
 	Projects        struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	}
 	Packages struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	}
 	Repositories struct {
 		TotalCount int
 	} `graphql:"repositories(privacy: PUBLIC)"`
 	MembersWithRole struct {
-		TotalCount githubv4.Int
+		TotalCount int
 	} `graphql:"membersWithRole(first: 100)"`
 }
