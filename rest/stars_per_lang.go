@@ -5,13 +5,13 @@ import (
 	h "github.com/irevenko/octostats/helpers"
 )
 
-func StarsPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, starsNum []int) {
-	var starsSlice []int
+func StarsPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, starsNum []float64) {
+	var starsSlice []float64
 	var langsSlice []string
 
 	for _, v := range allRepos {
 		starsNum := *v.StargazersCount
-		starsSlice = append(starsSlice, starsNum)
+		starsSlice = append(starsSlice, float64(starsNum))
 
 		if v.Language != nil {
 			lang := *v.Language

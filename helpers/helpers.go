@@ -5,8 +5,8 @@ import (
 )
 
 //CountDuplicates func counts duplicates in string slice
-func CountDuplicates(strSlice []string) map[string]int {
-	duplicate := map[string]int{}
+func CountDuplicates(strSlice []string) map[string]float64 {
+	duplicate := map[string]float64{}
 
 	for _, v := range strSlice {
 		_, exist := duplicate[v]
@@ -22,16 +22,16 @@ func CountDuplicates(strSlice []string) map[string]int {
 }
 
 //CountLanguagesCommit counts duplicates and adds up commits values
-func CountLanguagesCommit(strSlice []string, intSlice []int) map[string]int {
-	duplicate := map[string]int{}
+func CountLanguagesCommit(strSlice []string, floatSlice []float64) map[string]float64 {
+	duplicate := map[string]float64{}
 
 	for i, v := range strSlice {
 		_, exist := duplicate[v]
 
 		if exist {
-			duplicate[v] += intSlice[i]
+			duplicate[v] += floatSlice[i]
 		} else {
-			duplicate[v] = intSlice[i]
+			duplicate[v] = floatSlice[i]
 		}
 	}
 
@@ -39,8 +39,8 @@ func CountLanguagesCommit(strSlice []string, intSlice []int) map[string]int {
 }
 
 //CalcStarsOrForks iterates over slice and adds up it's values
-func CalcStarsOrForks(strings []string, integers []int) map[string]int {
-	newMap := map[string]int{}
+func CalcStarsOrForks(strings []string, integers []float64) map[string]float64 {
+	newMap := map[string]float64{}
 
 	for i, v := range strings {
 		newMap[v] += integers[i]
@@ -50,9 +50,9 @@ func CalcStarsOrForks(strings []string, integers []int) map[string]int {
 }
 
 //SortMap splits map into two slices and sorts them
-func SortMap(someMap map[string]int) (strings []string, integers []int) {
+func SortMap(someMap map[string]float64) (strings []string, integers []float64) {
 	var strSlice []string
-	var intSlice []int
+	var intSlice []float64
 
 	keys := make([]string, 0, len(someMap))
 	for key := range someMap {

@@ -8,10 +8,13 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
-func AllPullRequests(client *githubv4.Client, user string, from int, to int) []PullRequestContributions {
+func AllPullRequests(client *githubv4.Client, user string, fromYear int, toYear int) []PullRequestContributions {
 	loc, _ := time.LoadLocation("Local")
-	fromDate := time.Date(from, time.Month(1), 1, 0, 0, 0, 0, loc)
-	toDate := time.Date(to, time.Month(1), 1, 0, 0, 0, 0, loc)
+	_, month, day := time.Now().Date()
+	var m int = int(month)
+	var d int = int(day)
+	fromDate := time.Date(fromYear, time.Month(m), d, 0, 0, 0, 0, loc)
+	toDate := time.Date(toYear, time.Month(m), d, 0, 0, 0, 0, loc)
 
 	variables := map[string]interface{}{
 		"user": githubv4.String(user),

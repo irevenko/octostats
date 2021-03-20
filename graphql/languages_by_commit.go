@@ -5,11 +5,11 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
-func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) (languages []string, commitsNum []int) {
+func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) (languages []string, commitsNum []float64) {
 	commits := AllCommits(client, user, from, to)
 
 	var langsSlice []string
-	var numsSlice []int
+	var numsSlice []float64
 
 	for i, v := range commits {
 		if v.Repository.PrimaryLanguage.Name == "" {
@@ -18,7 +18,7 @@ func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) (
 			langsSlice = append(langsSlice, string(commits[i].Repository.PrimaryLanguage.Name))
 		}
 
-		numsSlice = append(numsSlice, int(commits[i].Contributions.TotalCount))
+		numsSlice = append(numsSlice, float64(commits[i].Contributions.TotalCount))
 	}
 
 	languagesCommit := h.CountLanguagesCommit(langsSlice, numsSlice)

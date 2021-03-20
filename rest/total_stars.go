@@ -9,7 +9,7 @@ func TotalStars(client *github.Client, allRepos []*github.Repository) (starsNum 
 
 	var totalStars int
 	for _, v := range stars {
-		totalStars += v
+		totalStars += int(v)
 	}
 
 	return totalStars

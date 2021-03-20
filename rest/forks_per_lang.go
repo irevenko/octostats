@@ -5,13 +5,13 @@ import (
 	h "github.com/irevenko/octostats/helpers"
 )
 
-func ForksPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, forksNum []int) {
-	var forksSlice []int
+func ForksPerLanguage(client *github.Client, allRepos []*github.Repository) (languages []string, forksNum []float64) {
+	var forksSlice []float64
 	var langsSlice []string
 
 	for _, v := range allRepos {
 		forksNum := *v.ForksCount
-		forksSlice = append(forksSlice, forksNum)
+		forksSlice = append(forksSlice, float64(forksNum))
 
 		if v.Language != nil {
 			lang := *v.Language

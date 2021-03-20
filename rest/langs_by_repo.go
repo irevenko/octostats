@@ -5,7 +5,7 @@ import (
 	h "github.com/irevenko/octostats/helpers"
 )
 
-func LanguagesByRepo(client *github.Client, allRepos []*github.Repository) (languages []string, occurrences []int) {
+func LanguagesByRepo(client *github.Client, allRepos []*github.Repository) (languages []string, occurrences []float64) {
 	var langsSlice []string
 
 	for _, v := range allRepos {

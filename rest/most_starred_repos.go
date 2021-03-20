@@ -5,14 +5,14 @@ import (
 	h "github.com/irevenko/octostats/helpers"
 )
 
-func MostStarredRepos(client *github.Client, allRepos []*github.Repository) (repoNames []string, repoStars []int) {
-	var starsSlice []int
+func MostStarredRepos(client *github.Client, allRepos []*github.Repository) (repoNames []string, repoStars []float64) {
+	var starsSlice []float64
 	var namesSlice []string
 
 	for _, v := range allRepos {
 		stars := *v.StargazersCount
 		name := *v.Name
-		starsSlice = append(starsSlice, stars)
+		starsSlice = append(starsSlice, float64(stars))
 		namesSlice = append(namesSlice, name)
 	}
 

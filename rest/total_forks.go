@@ -9,7 +9,7 @@ func TotalForks(client *github.Client, allRepos []*github.Repository) (forksNum 
 
 	var totalForks int
 	for _, v := range forks {
-		totalForks += v
+		totalForks += int(v)
 	}
 
 	return totalForks

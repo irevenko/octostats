@@ -5,14 +5,14 @@ import (
 	h "github.com/irevenko/octostats/helpers"
 )
 
-func MostForkedRepos(client *github.Client, allRepos []*github.Repository) (repoNames []string, repoForks []int) {
-	var forksSlice []int
+func MostForkedRepos(client *github.Client, allRepos []*github.Repository) (repoNames []string, repoForks []float64) {
+	var forksSlice []float64
 	var namesSlice []string
 
 	for _, v := range allRepos {
 		forks := *v.ForksCount
 		name := *v.Name
-		forksSlice = append(forksSlice, forks)
+		forksSlice = append(forksSlice, float64(forks))
 		namesSlice = append(namesSlice, name)
 	}
 

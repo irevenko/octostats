@@ -28,37 +28,37 @@ func RestExamples(client *github.Client, allRepos []*github.Repository) {
 	forkedRepos, forkedNums := r.MostForkedRepos(client, allRepos)
 	fmt.Println("Most forked repos:")
 	for i, v := range forkedRepos {
-		fmt.Println(v + ": " + strconv.Itoa(forkedNums[i]))
+		fmt.Println(v + ": " + strconv.FormatFloat(forkedNums[i], 'f', -1, 64))
 	}
 
 	starredRepos, starredNums := r.MostStarredRepos(client, allRepos)
 	fmt.Println("\nMost starred repos:")
 	for i, v := range starredRepos {
-		fmt.Println(v + ": " + strconv.Itoa(starredNums[i]))
+		fmt.Println(v + ": " + strconv.FormatFloat(starredNums[i], 'f', -1, 64))
 	}
 
 	usedLangs, langsNum := r.LanguagesByRepo(client, allRepos)
 	fmt.Println("\nLanguages by repo:")
 	for i, v := range usedLangs {
-		fmt.Println(v + ": " + strconv.Itoa(langsNum[i]))
+		fmt.Println(v + ": " + strconv.FormatFloat(langsNum[i], 'f', -1, 64))
 	}
 
 	usedLicenses, licsNum := r.MostUsedLicenses(client, allRepos)
 	fmt.Println("\nMost used licenses:")
 	for i, v := range usedLicenses {
-		fmt.Println(v + ": " + strconv.Itoa(licsNum[i]))
+		fmt.Println(v + ": " + strconv.FormatFloat(licsNum[i], 'f', -1, 64))
 	}
 
 	starsPerL, starsNum := r.StarsPerLanguage(client, allRepos)
 	fmt.Println("\nStars per lang:")
 	for i, v := range starsPerL {
-		fmt.Println(v + ": " + strconv.Itoa(starsNum[i]))
+		fmt.Println(v + ": " + strconv.FormatFloat(starsNum[i], 'f', -1, 64))
 	}
 
 	forksPerL, forksNum := r.ForksPerLanguage(client, allRepos)
 	fmt.Println("\nForks per lang:")
 	for i, v := range forksPerL {
-		fmt.Println(v + ": " + strconv.Itoa(forksNum[i]))
+		fmt.Println(v + ": " + strconv.FormatFloat(forksNum[i], 'f', -1, 64))
 	}
 
 	totalStars := r.TotalStars(client, allRepos)

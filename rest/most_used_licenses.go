@@ -5,7 +5,7 @@ import (
 	h "github.com/irevenko/octostats/helpers"
 )
 
-func MostUsedLicenses(client *github.Client, allRepos []*github.Repository) (licenses []string, occurrences []int) {
+func MostUsedLicenses(client *github.Client, allRepos []*github.Repository) (licenses []string, occurrences []float64) {
 	var licensesSlice []string
 
 	for _, v := range allRepos {
