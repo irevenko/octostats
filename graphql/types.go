@@ -123,26 +123,14 @@ type User struct {
 		TotalCount int
 	} `graphql:"repositories(privacy: PUBLIC)"`
 	Organizations struct {
-		Nodes []struct {
-			Name string
-		}
-	} `graphql:"organizations(first: 100)"`
+		TotalCount int
+	} `graphql:"organizations"`
 	SponsorshipsAsSponsor struct {
-		Nodes []struct {
-			Sponsorable struct {
-				SponsorsListing struct {
-					Slug string
-				}
-			}
-		}
-	} `graphql:"sponsorshipsAsSponsor(first: 100)"`
+		TotalCount int
+	} `graphql:"sponsorshipsAsSponsor"`
 	SponsorshipsAsMaintainer struct {
-		Nodes []struct {
-			SponsorEntity struct {
-				User struct{ Login string } `graphql:"... on User"`
-			}
-		}
-	} `graphql:"sponsorshipsAsMaintainer(first: 100)"`
+		TotalCount int
+	} `graphql:"sponsorshipsAsMaintainer"`
 }
 
 type Organization struct {
