@@ -94,5 +94,11 @@ var OrganizationQuery struct {
 		MembersWithRole struct {
 			TotalCount int
 		} `graphql:"membersWithRole(first: 100)"`
+		SponsorshipsAsSponsor struct {
+			TotalCount int
+		} `graphql:"sponsorshipsAsSponsor"`
+		SponsorshipsAsMaintainer struct {
+			TotalCount int
+		} `graphql:"sponsorshipsAsMaintainer"`
 	} `graphql:"organization(login: $user)"`
 }

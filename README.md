@@ -426,7 +426,7 @@ Feel free to check [open issues](https://github.com/irevenko/octostats/issues).
 - see readme-stats, metrics
 
 # ToDo
-- return errors
+- return errors (or not)
 
 # License 📑 
 (c) 2021 Ilya Revenko. [MIT License](https://tldrlegal.com/license/mit-license)
