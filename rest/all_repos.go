@@ -2,21 +2,21 @@ package rest
 
 import (
 	"context"
-	"log"
+	"fmt"
 
 	"github.com/google/go-github/v33/github"
 )
 
-func AllRepos(ctx context.Context, client *github.Client, account string) []*github.Repository {
+func AllRepos(ctx context.Context, client *github.Client, account string) (allRepos []*github.Repository, err error) {
 	opt := &github.RepositoryListOptions{
 		ListOptions: github.ListOptions{PerPage: 100},
 	}
 
-	var allRepos []*github.Repository
 	for {
-		repos, resp, err := client.Repositories.List(ctx, account, opt)
-		if err != nil {
-			log.Fatal(err)
+		repos, resp, clientErr := client.Repositories.List(ctx, account, opt)
+		if clientErr != nil {
+			err = fmt.Errorf("Couldn't get all repositories for %s: %w", account, clientErr)
+			break
 		}
 		allRepos = append(allRepos, repos...)
 		if resp.NextPage == 0 {
@@ -25,5 +25,5 @@ func AllRepos(ctx context.Context, client *github.Client, account string) []*git
 		opt.Page = resp.NextPage
 	}
 
-	return allRepos
+	return
 }
