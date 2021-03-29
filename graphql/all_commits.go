@@ -2,13 +2,13 @@ package graphql
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"time"
 
 	"github.com/shurcooL/githubv4"
 )
 
-func AllCommits(client *githubv4.Client, user string, fromYear int, toYear int) []CommitContributions {
+func AllCommits(client *githubv4.Client, user string, fromYear int, toYear int) ([]CommitContributions, error) {
 	loc, _ := time.LoadLocation("Local")
 	_, month, day := time.Now().Date()
 	var m int = int(month)
@@ -23,8 +23,8 @@ func AllCommits(client *githubv4.Client, user string, fromYear int, toYear int) 
 	}
 	err := client.Query(context.Background(), &ContributionsQuery, variables)
 	if err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("Couldn't get commits for %s: %w", user, err)
 	}
 
-	return ContributionsQuery.User.ContributionsCollection.CommitContributionsByRepository
+	return ContributionsQuery.User.ContributionsCollection.CommitContributionsByRepository, nil
 }

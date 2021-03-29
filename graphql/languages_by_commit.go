@@ -5,8 +5,12 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
-func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) (languages []string, commitsNum []float64) {
-	commits := AllCommits(client, user, from, to)
+func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) (
+	languages []string,
+	commitsNum []float64,
+	err error,
+) {
+	commits, err := AllCommits(client, user, from, to)
 
 	var langsSlice []string
 	var numsSlice []float64
@@ -24,5 +28,5 @@ func LanguagesByCommit(client *githubv4.Client, user string, from int, to int) (
 	languagesCommit := h.CountLanguagesCommit(langsSlice, numsSlice)
 	langs, count := h.SortMap(languagesCommit)
 
-	return langs, count
+	return langs, count, err
 }

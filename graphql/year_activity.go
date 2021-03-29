@@ -2,21 +2,22 @@ package graphql
 
 import (
 	"context"
-	"log"
+	"fmt"
 
 	"github.com/shurcooL/githubv4"
 )
 
-func YearActivity(client *githubv4.Client, user string) (dates []string, contribs []float64) {
+func YearActivity(client *githubv4.Client, user string) (dates []string, contribs []float64, err error) {
 	variables := map[string]interface{}{
 		"user":          githubv4.String(user),
 		"repoCount":     githubv4.Int(100),
 		"languageCount": githubv4.Int(100),
 	}
 
-	err := client.Query(context.Background(), &YearActivityQuery, variables)
-	if err != nil {
-		log.Fatal(err)
+	clientErr := client.Query(context.Background(), &YearActivityQuery, variables)
+	if clientErr != nil {
+		err = fmt.Errorf("Couldn't get year activity for %s: %w", user, clientErr)
+		return
 	}
 
 	var datesSlice []string
@@ -31,5 +32,5 @@ func YearActivity(client *githubv4.Client, user string) (dates []string, contrib
 		}
 	}
 
-	return datesSlice, contribsSlice
+	return datesSlice, contribsSlice, nil
 }
