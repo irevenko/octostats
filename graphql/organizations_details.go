@@ -2,20 +2,20 @@ package graphql
 
 import (
 	"context"
-	"log"
+	"fmt"
 
 	"github.com/shurcooL/githubv4"
 )
 
-func OrganizationDetails(client *githubv4.Client, organization string) Organization {
+func OrganizationDetails(client *githubv4.Client, organization string) (org Organization, err error) {
 	variables := map[string]interface{}{
 		"user": githubv4.String(organization),
 	}
 
-	err := client.Query(context.Background(), &OrganizationQuery, variables)
-	if err != nil {
-		log.Fatal(err)
+	clientErr := client.Query(context.Background(), &OrganizationQuery, variables)
+	if clientErr != nil {
+		return org, fmt.Errorf("Couldn't get details for organization %s: %w", organization, clientErr)
 	}
 
-	return OrganizationQuery.Organization
+	return OrganizationQuery.Organization, nil
 }

@@ -2,13 +2,13 @@ package graphql
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"time"
 
 	"github.com/shurcooL/githubv4"
 )
 
-func AllContributions(client *githubv4.Client, user string, fromYear int, toYear int) ContributionsCollection {
+func AllContributions(client *githubv4.Client, user string, fromYear int, toYear int) (c ContributionsCollection, err error) {
 	loc, _ := time.LoadLocation("Local")
 	_, month, day := time.Now().Date()
 	var m int = int(month)
@@ -22,10 +22,10 @@ func AllContributions(client *githubv4.Client, user string, fromYear int, toYear
 		"to":   githubv4.DateTime{Time: toDate},
 	}
 
-	err := client.Query(context.Background(), &ContributionsQuery, variables)
-	if err != nil {
-		log.Fatal(err)
+	clientErr := client.Query(context.Background(), &ContributionsQuery, variables)
+	if clientErr != nil {
+		return c, fmt.Errorf("Couldn't get contributions for %s: %w", user, clientErr)
 	}
 
-	return ContributionsQuery.User.ContributionsCollection
+	return ContributionsQuery.User.ContributionsCollection, nil
 }
