@@ -51,15 +51,19 @@ Returns slice of repos for user/organization (https://api.github.com/users/USERN
 ```go
 import ( 
     "fmt"
+    "log"
 
-	"github.com/google/go-github/github"
+    "github.com/google/go-github/github"
     r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println(allRepos)
 }
 ```
@@ -68,17 +72,21 @@ func main() {
 Returns two slices of names and occurrences
 ```go
 import ( 
-	"fmt"
-	"strconv"
+    "fmt"
+    "log"
+    "strconv"
 
-	"github.com/google/go-github/github"
+    "github.com/google/go-github/github"
     r "github.com/irevenko/octostats/rest"
 )
 
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
 
 	usedLangs, langsNum := r.LanguagesByRepo(client, allRepos)
 	fmt.Println("Languages By Repo")
@@ -93,6 +101,7 @@ Returns two slices of names and occurrences
 ``` go
 import ( 
 	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/google/go-github/github"
@@ -102,7 +111,10 @@ import (
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
 
 	usedLicenses, licsNum := r.MostUsedLicenses(client, allRepos)
 	fmt.Println("Most used licenses")
@@ -117,6 +129,7 @@ Returns two slices of names and stars num
 ``` go
 import ( 
 	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/google/go-github/github"
@@ -125,8 +138,11 @@ import (
 
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
-
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
     
 	starredRepos, starredNums := r.MostStarredRepos(client, allRepos)
 	fmt.Println("Most starred repos")
@@ -141,6 +157,7 @@ Returns two slices of names and forks num
 ```go
 import ( 
 	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/google/go-github/github"
@@ -150,7 +167,10 @@ import (
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
     
 	forkedRepos, forkedNums := r.MostForkedRepos(client, allRepos)
 	fmt.Println("Most forked repos")
@@ -165,6 +185,7 @@ Returns two slices of languages and stars num
 ```go
 import ( 
 	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/google/go-github/github"
@@ -174,7 +195,10 @@ import (
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
     
 	starsPerL, starsNum := r.StarsPerLanguage(client, allRepos)
 	fmt.Println("Stars per lang")
@@ -188,6 +212,7 @@ Returns two slices of languages and forks num
 ```go
 import ( 
  	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/google/go-github/github"
@@ -197,7 +222,10 @@ import (
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
 
 	forksPerL, forksNum := r.ForksPerLanguage(client, allRepos)
 	fmt.Println("Forks per lang")
@@ -212,6 +240,7 @@ Returns integer number
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
@@ -220,7 +249,10 @@ import (
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
 
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
     
 	totalStars := r.TotalStars(client, allRepos)
 	fmt.Println("Total stars")
@@ -233,6 +265,7 @@ Returns integer number
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/google/go-github/github"
 	r "github.com/irevenko/octostats/rest"
@@ -240,8 +273,11 @@ import (
 
 func main() {
 	ctx, client := r.AuthREST("<YOUR_TOKEN>")
-
-	allRepos := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	
+	allRepos, err := r.AllRepos(ctx, client, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
     
 	totalForks := r.TotalForks(client, allRepos)
 	fmt.Println("Total forks")
@@ -261,6 +297,7 @@ Returns two slices of languages and commits <br>
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -269,7 +306,10 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	langs, commits := g.LanguagesByCommit(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	langs, commits, err := g.LanguagesByCommit(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println("\nLanguages by commit")
 	for i, v := range langs {
 		fmt.Printf("%v : %v\n", v, commits[i])
@@ -283,6 +323,7 @@ Returns ```ContributionsCollection``` (see https://github.com/irevenko/octostats
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -291,7 +332,10 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allContribs := g.AllContributions(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	allContribs, err := g.AllContributions(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println("\nAll contribs 2020-2021:")
 	fmt.Println(allContribs)
 }
@@ -303,6 +347,7 @@ Returns ```[]commitContributions``` (see https://github.com/irevenko/octostats/b
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -311,7 +356,10 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allCommits := g.AllCommits(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	allCommits, err := g.AllCommits(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println("\nAll commits 2020-2021:")
 	fmt.Println(allCommits)
 }
@@ -323,6 +371,7 @@ Returns ```[]issueContributions``` (see https://github.com/irevenko/octostats/bl
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -331,7 +380,10 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allIssues := g.AllIssues(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	allIssues, err := g.AllIssues(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println("\nAll issues 2020-2021:")
 	fmt.Println(allIssues)
 }
@@ -343,6 +395,7 @@ Returns ```[]pullRequestContributions``` (see https://github.com/irevenko/octost
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -351,7 +404,10 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	allPrs := g.AllPullRequests(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	allPrs, err := g.AllPullRequests(qlClient, "<USER_OR_ORGANIZATION>", 2020, 2021)
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println("\nAll pull requests 2020-2021:")
 	fmt.Println(allPrs)
 }
@@ -362,6 +418,7 @@ Returns two slices of dates and contributions <br>
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -370,7 +427,10 @@ import (
 func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
-	dates, contribs := g.YearActivity(qlClient, "<USER_OR_ORGANIZATION>")
+	dates, contribs, err := g.YearActivity(qlClient, "<USER_OR_ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println(dates, contribs)
 }
 ```
@@ -380,6 +440,7 @@ Returns ```User``` (see https://github.com/irevenko/octostats/blob/main/graphql/
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -389,7 +450,10 @@ func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
 	fmt.Println("User Details:")
-	userInfo := g.UserDetails(qlClient, "<USER>")
+	userInfo, err := g.UserDetails(qlClient, "<USER>")
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println(userInfo)
 }
 ```
@@ -399,6 +463,7 @@ Returns ```Organization``` (see https://github.com/irevenko/octostats/blob/main/
 ```go
 import ( 
 	"fmt"
+	"log"
 
 	"github.com/shurcooL/githubv4"
 	g "github.com/irevenko/octostats/graphql"
@@ -408,7 +473,10 @@ func main() {
 	qlClient := g.AuthGraphQL("<YOUR_TOKEN>")
 
 	fmt.Println("Organization Details:")
-	orgInfo := g.OrganizationDetails(qlClient, "<ORGANIZATION>")
+	orgInfo, err := g.OrganizationDetails(qlClient, "<ORGANIZATION>")
+	if err != nil {
+	    log.Fatal(err)
+	}
 	fmt.Println(orgInfo)
 }
 ```
@@ -424,9 +492,6 @@ Feel free to check [open issues](https://github.com/irevenko/octostats/issues).
 # Notes
 - shows private repos and repos from orgs when using empty string as name (if authorized)
 - see readme-stats, metrics
-
-# ToDo
-- return errors (or not)
 
 # License 📑 
 (c) 2021 Ilya Revenko. [MIT License](https://tldrlegal.com/license/mit-license)
